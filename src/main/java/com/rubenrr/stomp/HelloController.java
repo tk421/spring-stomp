@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/")
 public class HelloController {
 
-    //@Autowired
-    //private SimpMessagingTemplate template;
+    @Autowired
+    private SimpMessagingTemplate template;
 
     @RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
@@ -28,7 +28,7 @@ public class HelloController {
     @SendTo("/topic/greetings")
     public Greeting greeting(HelloMessage message) throws Exception {
         Thread.sleep(5000); // simulated delay
-        //this.template.convertAndSend("/topic/greetings", "Hello World");
+        this.template.convertAndSend("/topic/greetings", "Hello World");
         return new Greeting("Hello, " + message.getName() + "!");
     }
 
